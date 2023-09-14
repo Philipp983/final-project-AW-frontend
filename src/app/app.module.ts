@@ -23,7 +23,7 @@ import {AnimationTextComponent} from "./animation-text/animation-text.component"
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    EscapeRoomComponent
+    EscapeRoomComponent,
     RegisterComponent,
     HighScoreComponent,
     AnimationTextComponent
