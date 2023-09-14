@@ -10,6 +10,9 @@ import {FormsModule} from "@angular/forms";
 import {CookieInterceptor} from "./cookie.interceptor";
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {HighScoreComponent} from "./high-score/high-score.component";
+import {AnimationTextComponent} from "./animation-text/animation-text.component";
 import { EscapeRoomComponent } from './escape-room/escape-room.component';
 import {AudioService} from "./audio.service";
 
@@ -20,13 +23,16 @@ import {AudioService} from "./audio.service";
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    HighScoreComponent,
+    AnimationTextComponent,
     EscapeRoomComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
