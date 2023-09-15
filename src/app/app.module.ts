@@ -26,7 +26,7 @@ import {AnimationTextComponent} from "./animation-text/animation-text.component"
     EscapeRoomComponent,
     RegisterComponent,
     HighScoreComponent,
-    AnimationTextComponent
+    AnimationTextComponent,
   ],
   imports: [
     BrowserModule,
