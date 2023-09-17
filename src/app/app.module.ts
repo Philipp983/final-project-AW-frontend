@@ -15,6 +15,7 @@ import {AudioService} from "./audio.service";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HighScoreComponent} from "./high-score/high-score.component";
 import {AnimationTextComponent} from "./animation-text/animation-text.component";
+import { AceEditorComponent } from './ace-editor/ace-editor.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {AnimationTextComponent} from "./animation-text/animation-text.component"
     EscapeRoomComponent,
     RegisterComponent,
     HighScoreComponent,
-    AnimationTextComponent
+    AnimationTextComponent,
+    AceEditorComponent
   ],
   imports: [
     BrowserModule,
