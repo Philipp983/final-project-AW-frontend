@@ -16,6 +16,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HighScoreComponent} from "./high-score/high-score.component";
 import {AnimationTextComponent} from "./animation-text/animation-text.component";
 import { AceEditorComponent } from './ace-editor/ace-editor.component';
+import { TimerComponent } from './timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { AceEditorComponent } from './ace-editor/ace-editor.component';
     RegisterComponent,
     HighScoreComponent,
     AnimationTextComponent,
-    AceEditorComponent
+    AceEditorComponent,
+    TimerComponent
   ],
   imports: [
     BrowserModule,
