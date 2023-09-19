@@ -8,6 +8,7 @@ import {EscapeRoomComponent} from "./escape-room/escape-room.component";
 import {HighScoreComponent} from "./high-score/high-score.component";
 // import {ValidationJSComponent} from "./validation-js/validation-js.component";
 import {AnimationTextComponent} from "./animation-text/animation-text.component";
+import {LearnObjektComponent} from "./learn-objekt/learn-objekt.component";
 
 const routes: Routes = [
   {path : "", component: HomeComponent},
@@ -17,7 +18,8 @@ const routes: Routes = [
   {path:'high-score', component: HighScoreComponent},
   // {path: 'validation', component: ValidationJSComponent},
   {path: 'animation', component: AnimationTextComponent},
-  {path : "register", component: RegisterComponent}
+  {path : "register", component: RegisterComponent},
+  {path : "learn", component: LearnObjektComponent}
 ];
 
 @NgModule({
