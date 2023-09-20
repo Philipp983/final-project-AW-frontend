@@ -12,6 +12,7 @@ export interface User {
   roles: string;
   idxActualLearnObject: number;
   life: number;
+  score: number;
 }
 
 @Injectable({
@@ -24,7 +25,7 @@ export class UserService {
     this.username = authService.getUsername();
   }
 
-  getUserByUsername(username: string): Observable<User> {
+  getUserByUsername(username: string | undefined): Observable<User> {
     return this.client.get<User>(environment.baseUrl + "/user/" + username);
   }
 }
