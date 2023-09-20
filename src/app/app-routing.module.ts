@@ -10,6 +10,7 @@ import {HighScoreComponent} from "./high-score/high-score.component";
 import {AnimationTextComponent} from "./animation-text/animation-text.component";
 import {LearnObjektComponent} from "./learn-objekt/learn-objekt.component";
 import {AceEditorComponent} from "./ace-editor/ace-editor.component";
+import {UserComponent} from "./user/user.component";
 
 
 const routes: Routes = [
@@ -21,9 +22,9 @@ const routes: Routes = [
   // {path: 'validation', component: ValidationJSComponent},
   {path: 'animation', component: AnimationTextComponent},
   {path : "register", component: RegisterComponent},
-  {path : "learn", component: LearnObjektComponent}
-  {path : "register", component: RegisterComponent},
-  {path : "ace-editor", component: AceEditorComponent}
+  {path : "learn", component: LearnObjektComponent},
+  {path : "ace-editor", component: AceEditorComponent},
+  {path : "user", component: UserComponent}
 ];
 
 @NgModule({

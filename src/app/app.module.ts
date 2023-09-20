@@ -19,6 +19,7 @@ import { AceEditorComponent } from './ace-editor/ace-editor.component';
 import { TimerComponent } from './timer/timer.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import { LearnObjektComponent } from './learn-objekt/learn-objekt.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LearnObjektComponent } from './learn-objekt/learn-objekt.component';
     TerminalComponent,
     LearnObjektComponent,
     AceEditorComponent,
-    TimerComponent
+    TimerComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -15,9 +15,6 @@ export class LearnObjektComponent implements OnInit {
   }
 
   load() {
-    // Get new dog
-    // Javascript: fetch(API_URL) ---> Return Promise (async) -> .then()
-    // Angular: HttpClient ---> Return Observable -> .subscribe()
     this.levelService.getLevel().subscribe(
       result => this.level = result
     );
