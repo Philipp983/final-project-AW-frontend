@@ -21,8 +21,7 @@ const routes: Routes = [
   // {path: 'validation', component: ValidationJSComponent},
   {path: 'animation', component: AnimationTextComponent},
   {path : "register", component: RegisterComponent},
-  {path : "learn", component: LearnObjektComponent}
-  {path : "register", component: RegisterComponent},
+  {path : "learn", component: LearnObjektComponent},
   {path : "ace-editor", component: AceEditorComponent}
 ];
 
