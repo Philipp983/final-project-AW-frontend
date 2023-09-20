@@ -2,10 +2,18 @@
   <div class="button-container1">
     <button (click)="playAudio()" class="play-button">{{buttonText}}</button>
   </div>
+  <div>
+    <app-timer [duration]="120"></app-timer>
+  </div>
   <div class="container">
 
-    <p class="text">{{intro}}</p>
+    <app-animation-text [intro]="intro"></app-animation-text>
+
+
+<!--    <p class="text">{{intro}}</p>-->
+
   </div>
+
   <div class="button-container2">
     <button routerLink="/" class="left-button">Back to Menu</button>
     <button class="right-button">Start Mission</button>
@@ -16,4 +24,3 @@
   </audio>
 
 </div>
-
