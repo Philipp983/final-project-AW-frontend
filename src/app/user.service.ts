@@ -16,7 +16,8 @@ export interface User {
 }
 export interface Highscore {
   userName: String,
-  score : number
+  score : number,
+  levelScore: number[]
 }
 
 @Injectable({
@@ -35,5 +36,16 @@ export class UserService {
 
   getScore():Observable<Highscore[]> {
     return this.client.get<Highscore[]>(environment.baseUrl + "/score");
+  }
+
+  setScoreForLearnObjekt(score: number, idxLearnObject: number) {
+    const requestBody = {
+      username: this.username,
+      id_learnObject: idxLearnObject,
+      score: score,
+    };
+
+    this.client.post(environment.baseUrl + "/score/"+this.username+"/"+idxLearnObject +"/"+score,requestBody);
+    /*this.client.post(environment.baseUrl + "/score/"+this.username+"/"+idxLearnObject +"/"+score);*/
   }
 }
