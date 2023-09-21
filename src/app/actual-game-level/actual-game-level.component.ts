@@ -1,32 +1,39 @@
-import {Component, ViewChild, ElementRef, OnInit, OnDestroy} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {Level, LevelService} from "../level.service";
+import {environment} from "../../environments/environment";
 import {AudioService} from "../audio.service";
-//Use import instead of hard coding the intro text
-import animationTextData from 'src/assets/animationText.json';
 import {User, UserService} from "../user.service";
 import {AuthService} from "../auth.service";
 
 @Component({
-  selector: 'app-escape-room',
-  templateUrl: './escape-room.component.html',
-  styleUrls: ['./escape-room.component.css']
+  selector: 'app-actual-game-level',
+  templateUrl: './actual-game-level.component.html',
+  styleUrls: ['./actual-game-level.component.css']
 })
-export class EscapeRoomComponent implements OnInit, OnDestroy {
+export class ActualGameLevelComponent implements OnInit, OnDestroy {
 
-  isStarted: boolean = false;
+  levelId: number | undefined;
 
-  constructor(private audioService: AudioService,
-              private userService: UserService,
-              private authService: AuthService) {
-  }
+  levelData?: Level;
 
-  intro: string[] = animationTextData.articles[0].content;
+  imageUrl: string = "";
+
+  user: User | undefined;
+
+  constructor(
+    private route: ActivatedRoute,
+    private levelService: LevelService,
+    private audioService: AudioService,
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
   @ViewChild('audioPlayer2') audioPlayer2!: ElementRef<HTMLAudioElement>;
-  buttonText = "Intro";
-  user: User | undefined;
+  buttonText= "Intro";
 
-  ngOnInit() {
+  ngOnInit(): void {
     const username = this.authService.getUsername();
     this.userService.getUserByUsername(username).subscribe(
       (response) => {
@@ -36,6 +43,13 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
         console.error('Error fetching user data:', error);
       }
     );
+    const levelIdParam = this.route.snapshot.paramMap.get('levelId');
+    this.levelId = levelIdParam ? +levelIdParam : 0;
+
+    if (this.levelId) {
+      this.loadLevelData(this.levelId);
+    }
+
     this.audioService.play();
     this.audioService.setVolume(0.3);
   }
@@ -45,13 +59,24 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
     this.audioService.pause();
   }
 
+  loadLevelData(levelId: number): void {
+    this.levelService.indexLevel = levelId.toString();  // Set the levelId in the service
+    this.levelService.getLevel().subscribe(
+      data =>
+      {
+      this.levelData = data;
+        this.imageUrl = environment.baseUrl + this.levelData.image;
+    });
+  }
+
+  // Audio part
   playAudio() {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     if (audio.paused) {
       // If audio is paused, play it
       audio.play();
       this.buttonText = 'Pause';
-    } else if (audio.played) {
+    } else if(audio.played){
       // If audio is playing, pause it
       audio.pause();
       this.buttonText = 'Intro';
@@ -60,10 +85,6 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
 
   audioEnded() {
     this.buttonText = 'Intro'
-  }
-
-  startMission() {
-    this.isStarted = true;
   }
 
   displayHeartEmoji(life: number | undefined): string {
@@ -81,4 +102,3 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   }
 
 }
-
