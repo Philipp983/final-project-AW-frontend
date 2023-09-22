@@ -25,4 +25,20 @@ export class UserComponent implements OnInit {
       }
     );
   }
+
+
+  displayHeartEmoji(life: number | undefined): string {
+    if (life !== undefined) {
+      return '❤️'.repeat(life);
+    }
+    return '';
+  }
+
+  displayStarEmoji(idxActualLearnObject: number | undefined): string {
+    if (idxActualLearnObject !== undefined) {
+      return '⭐️'.repeat(idxActualLearnObject);
+    }
+    return '';
+  }
+
 }
