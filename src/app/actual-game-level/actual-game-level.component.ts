@@ -90,7 +90,7 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
 
   displayHeartEmoji(life: number | undefined): string {
     if (life !== undefined) {
-      return '❤️'.repeat(life);
+      return '❤️'.repeat(life) + '☠️'.repeat(3 - life);
     }
     return '';
   }
