@@ -33,21 +33,9 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const username = this.authService.getUsername();
     this.userService.getUserByUsername(username).subscribe(
-      (response) => {
-        this.user = response;
-      },
-      (error) => {
-        console.error('Error fetching user data:', error);
-      }
-    );
-
-    // Subscribe to user updates
-    this.userSubscription = this.userService.user$.subscribe(user => {
-      if (user) {
+      (user) => {
         this.user = user;
-      }
-    });
-
+      });
     this.audioService.play();
     this.audioService.setVolume(0.3);
   }
@@ -77,25 +65,6 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
 
   audioEnded() {
     this.buttonText = 'Intro'
-  }
-
-  startMission() {
-    this.isStarted = true;
-  }
-
-  displayHeartEmoji(life: number | undefined): string {
-
-    if (life !== undefined) {
-      return '❤️'.repeat(life) + '☠️'.repeat(3 - life);
-    }
-    return '';
-  }
-
-  displayStarEmoji(idxActualLearnObject: number | undefined): string {
-    if (idxActualLearnObject !== undefined) {
-      return '⭐️'.repeat(idxActualLearnObject);
-    }
-    return '';
   }
 
 }

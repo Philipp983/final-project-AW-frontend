@@ -37,13 +37,10 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const username = this.authService.getUsername();
     this.userService.getUserByUsername(username).subscribe(
-      (response) => {
-        this.user = response;
-      },
-      (error) => {
-        console.error('Error fetching user data:', error);
-      }
-    );
+      (user) => {
+        this.user = user;
+      });
+
     const levelIdParam = this.route.snapshot.paramMap.get('levelId');
     this.levelId = levelIdParam ? +levelIdParam : 0;
 
@@ -86,20 +83,6 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
 
   audioEnded() {
     this.buttonText = 'Intro'
-  }
-
-  displayHeartEmoji(life: number | undefined): string {
-    if (life !== undefined) {
-      return '❤️'.repeat(life) + '☠️'.repeat(3 - life);
-    }
-    return '';
-  }
-
-  displayStarEmoji(idxActualLearnObject: number | undefined): string {
-    if (idxActualLearnObject !== undefined) {
-      return '⭐️'.repeat(idxActualLearnObject);
-    }
-    return '';
   }
 
   handleTimeout() {
