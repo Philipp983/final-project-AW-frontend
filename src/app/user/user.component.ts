@@ -25,6 +25,22 @@ export class UserComponent implements OnInit {
       }
     );
   }
+
+
+  displayHeartEmoji(life: number | undefined): string {
+    if (life !== undefined) {
+      return '❤️'.repeat(life);
+    }
+    return '';
+  }
+
+  displayStarEmoji(idxActualLearnObject: number | undefined): string {
+    if (idxActualLearnObject !== undefined) {
+      return '⭐️'.repeat(idxActualLearnObject);
+    }
+    return '';
+  }
+
   computeScore(timeLimit: number, neededTime: number): number{
     if(neededTime > 10){
       return Math.round(((timeLimit-neededTime)*1000/6)/timeLimit-10);

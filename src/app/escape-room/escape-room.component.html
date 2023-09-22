@@ -3,6 +3,9 @@
   <button (click)="playAudio()" class="nav-button">{{buttonText}}</button>
   <button routerLink="/" class="nav-button">Back to Menu</button>
 </nav>
+<!--<div class="user">-->
+<!--  <app-user></app-user>-->
+<!--</div>-->
 <table class="user">
   <tr>
     <th colspan="2" class="title">{{user?.userName}}</th>
@@ -52,8 +55,8 @@
 <!--  <div>-->
 <!--    <button (click)="startMission()" class="button">Start Mission</button>-->
 <!--  </div>-->
-  <audio #audioPlayer (ended)="audioEnded()">
-    <source src="assets/sounds/intro.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+<audio #audioPlayer (ended)="audioEnded()">
+  <source src="assets/sounds/intro.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
 </body>
