@@ -14,10 +14,12 @@ export interface User {
   idxActualLearnObject: number;
   life: number;
   score: number;
+  levelScore: number[]
 }
 export interface Highscore {
   userName: String,
-  score : number
+  score : number,
+  levelScore: number[]
 }
 
 @Injectable({
@@ -55,4 +57,14 @@ export class UserService {
     );
   }
 
+
+  setScoreForLearnObjekt(score: number, idxLearnObject: number) {
+    const requestBody = {
+      username: this.username,
+      id_learnObject: idxLearnObject,
+      score: score,
+    };
+
+    this.client.post(environment.baseUrl + "/score/"+this.username+"/"+idxLearnObject +"/"+score,requestBody);
+  }
 }

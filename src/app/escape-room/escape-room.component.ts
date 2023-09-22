@@ -28,7 +28,7 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
   @ViewChild('audioPlayer2') audioPlayer2!: ElementRef<HTMLAudioElement>;
-
+  showIntro: boolean = false;
 
   ngOnInit() {
     const username = this.authService.getUsername();
