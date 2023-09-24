@@ -84,9 +84,11 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
     }
   }
 
+
   audioEnded() {
     this.buttonText = 'Intro'
   }
+
 
   displayHeartEmoji(life: number | undefined): string {
     if (life !== undefined) {
@@ -95,12 +97,14 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
     return '';
   }
 
+
   displayStarEmoji(idxActualLearnObject: number | undefined): string {
     if (idxActualLearnObject !== undefined) {
       return '⭐️'.repeat(idxActualLearnObject);
     }
     return '';
   }
+
 
   handleTimeout() {
     alert("You didn't solve the level.");
@@ -112,6 +116,22 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
         },
         (error) => {
           console.error('Error updating user life:', error);
+        }
+      );
+    }
+    this.router.navigate(['/escape-room']);
+  }
+
+  handleCodeChallengeSuccess() {
+    alert("You solved the level!");
+    if (this.user && this.user.idxActualLearnObject <= 2) {
+      this.user.idxActualLearnObject += 1;
+      this.userService.updateUserIdxActualLearnObject(this.user).subscribe(
+        (response) => {
+          console.log('User idxActualLearnObject updated:', response);
+        },
+        (error) => {
+          console.error('Error updating user idxActualLearnObject:', error);
         }
       );
     }
