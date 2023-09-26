@@ -48,7 +48,7 @@ export class UserComponent implements OnInit {
     return 100;
 }
 
-    addScore(score: number, idxLearnObject: number) {
-      this.userService.setScoreForLearnObjekt(score,idxLearnObject);
+    addScore(score: number, idxLearnObject: number, username: string) {
+      this.userService.setScoreForLearnObjekt(score,idxLearnObject,username);
 }
 }

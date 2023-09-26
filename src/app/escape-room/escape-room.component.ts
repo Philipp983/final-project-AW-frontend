@@ -18,6 +18,7 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   user: User | undefined;
   userSubscription?: Subscription;  // Declare a subscription
   buttonText = "Intro";
+  selectedLevel: number = 0;
 
   constructor(private audioService: AudioService,
               private userService: UserService,
@@ -31,6 +32,7 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   showIntro: boolean = false;
 
   ngOnInit() {
+    this.fetchUserData();
     const username = this.authService.getUsername();
     this.userService.getUserByUsername(username).subscribe(
       (response) => {
@@ -50,6 +52,18 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
 
     this.audioService.play();
     this.audioService.setVolume(0.3);
+  }
+
+  fetchUserData(): void {
+    const username = this.authService.getUsername();
+    this.userService.getUserByUsername(username).subscribe(
+      (response) => {
+        // Update user data in escape-room component
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
   }
 
   ngOnDestroy() {
@@ -98,5 +112,8 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
     return '';
   }
 
+  setSelectedLevel(level: number) {
+    this.selectedLevel = level;
+  }
 }
 

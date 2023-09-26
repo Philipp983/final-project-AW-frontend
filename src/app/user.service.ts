@@ -58,14 +58,20 @@ export class UserService {
   }
 
 
-  setScoreForLearnObjekt(score: number, idxLearnObject: number) {
+  setScoreForLearnObjekt(score: number, idxLearnObject: number, username: string | undefined) {
     const requestBody = {
-      username: this.username,
+      username: username,
       id_learnObject: idxLearnObject,
       score: score,
     };
+    console.log(requestBody);
 
-    this.client.post(environment.baseUrl + "/score/"+this.username+"/"+idxLearnObject +"/"+score,requestBody);
+    this.client.post(environment.baseUrl + "/score/"+username+"/"+idxLearnObject +"/"+score,requestBody)
+      .subscribe(response => {
+        console.log('Score set successfully', response);
+      }, error => {
+        console.error('Error setting score:', error);
+      });
   }
 
   updateUserIdxActualLearnObject(user: User):  Observable<User> {
