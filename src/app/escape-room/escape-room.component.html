@@ -15,7 +15,7 @@
        [ngClass]="user.idxActualLearnObject > (i) ? 'image-link' : 'disabled'" (mouseenter)="showTooltip = true"
        (mouseleave)="showTooltip = false">
       <img [src]="'../../assets/pictures/mission' + (i + 1) + '.png'">
-      <div class="tooltip" [class.show-tooltip]="showTooltip">
+      <div class="tooltip" [class.show-tooltip]="showTooltip" [class.flip-tooltip]="i > 3">
          {{levels[i].story}}
       </div>
     </a>
