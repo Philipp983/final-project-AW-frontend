@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {User, UserService} from "../user.service";
 import {AuthService} from "../auth.service";
 
@@ -13,7 +13,6 @@ export class UserComponent implements OnInit {
   constructor(private userService: UserService,
               private authService: AuthService) {
   }
-
   ngOnInit(): void {
     const username = this.authService.getUsername();
     this.userService.getUserByUsername(username).subscribe(
@@ -29,7 +28,7 @@ export class UserComponent implements OnInit {
 
   displayHeartEmoji(life: number | undefined): string {
     if (life !== undefined) {
-      return '❤️'.repeat(life);
+      return '❤️'.repeat(life)+ '☠️'.repeat(3 - life);
     }
     return '';
   }

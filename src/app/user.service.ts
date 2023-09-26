@@ -57,6 +57,15 @@ export class UserService {
     );
   }
 
+  updateProfileImage(user: User): Observable<User> {
+    return this.client.put<User>(environment.baseUrl + "/user/updateImage", user).pipe(
+      tap(updatedUser => {
+        // Step 2: Emit new user data via the BehaviorSubject
+        this.userSubject.next(updatedUser);
+      })
+    );
+  }
+
 
   setScoreForLearnObjekt(score: number, idxLearnObject: number, username: string | undefined) {
     const requestBody = {

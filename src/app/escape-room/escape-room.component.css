@@ -9,15 +9,13 @@ body {
   display: grid;
   grid-template-areas:
       "user   .       .     navbar"
-      "story story story mission"
-      "story story story mission"
-      "story story story mission";
+      "story story tooltip mission"
+      "story story tooltip mission"
+      "story story tooltip mission";
 }
 
 .navbar {
   grid-area: navbar;
-  /*display: flex;*/
-  /*justify-content: flex-end;*/
   width: 100%;
 }
 
@@ -55,6 +53,7 @@ body {
 
 .mission {
   grid-area: mission;
+  position: relative;
   background-color: rgba(244, 244, 244, 0.7);
   border-radius: 10px;
   width: auto;
@@ -93,37 +92,22 @@ body {
 
 .user {
   grid-area: user;
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
-  padding: 10px;
-  text-align: left;
-  color: white;
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  font-size: 14px;
 }
 
-.title {
-  text-align: left;
-  font-size: 24px;
-  color: aqua;
-  padding: 5px;
-}
-
-.emoji {
-  font-size: 18px;
-  padding: 5px;
-  text-align: center;
-}
-
-/*
 .tooltip {
-  display: none;
   position: absolute;
-  background-color: #f9f9f9;
-  padding: 10px;
-  border: 1px solid #ccc;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  z-index: 999;
+  background-color: #333;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  visibility: hidden;
+  left: -200px;
+  right: 150px
 }
-*/
+
+.mission .image-link:hover .tooltip {
+  visibility: visible;
+}
+
