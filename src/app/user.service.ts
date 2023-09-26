@@ -58,7 +58,7 @@ export class UserService {
     );
   }
 
-  setScoreForLearnObjekt(score: number, idxLearnObject: number) {
+  setScoreForLearnObjekt(score: number, idxLearnObject: number, username: string | undefined) {
     const requestBody = {
       username: username,
       id_learnObject: idxLearnObject,
