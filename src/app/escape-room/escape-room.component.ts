@@ -21,7 +21,6 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   showTooltip: boolean = false;
   levels: Level[] = [];
 
-
   constructor(private audioService: AudioService,
               private userService: UserService,
               private authService: AuthService,
@@ -64,7 +63,6 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
       );
     }
   }
-
 
   ngOnDestroy() {
     // Pause audio when the component is destroyed

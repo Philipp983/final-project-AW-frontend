@@ -1,16 +1,18 @@
-import {Component, OnInit, ElementRef, AfterViewInit, Input} from '@angular/core';
+import {Component, OnInit, ElementRef, AfterViewInit, Input, EventEmitter, Output} from '@angular/core';
 import { AiService } from "../ai-service.service";
 import {UserService} from "../user.service";
+import { Router } from '@angular/router';
 
 // Make sure to declare Ace if TypeScript complains about the missing type.
 declare var ace: any;
 
 @Component({
   selector: 'app-ace-editor',
-  template: '<div id="editor" style="height: 200px"></div>' +
+  template: '<div id="editor" style="height: 400px; width: auto"></div>' +
     '<button (click)="compareSolutionToUser()">Run</button>' +
     '<button (click)="getHint()">Hint</button>' +
     '<button (click)="getSolution()">Solution</button>' +
+    '<button (click)="resetChallenge()">Reset</button>' +
 
     '<div id="output">{{output}}</div>',
 
@@ -20,6 +22,7 @@ export class AceEditorComponent implements AfterViewInit {
 
   @Input() codeChallenge: string | undefined;
   @Input() codeSolution: string | undefined;
+  @Output() codeChallengeSolved: EventEmitter<void> = new EventEmitter<void>();
 
 
   private editor: any;
@@ -28,7 +31,7 @@ export class AceEditorComponent implements AfterViewInit {
   // Use this constructor if you are not using the AI service
   // constructor() { }
 
-  constructor(private aiService: AiService, private userService: UserService) { }
+  constructor(private aiService: AiService, private userService: UserService, private router: Router) { }
 
   ngAfterViewInit() {
     this.editor = ace.edit('editor');
@@ -41,6 +44,9 @@ export class AceEditorComponent implements AfterViewInit {
     this.editor.setValue(this.codeChallenge);
   }
 
+  resetChallenge() {
+    this.editor.setValue(this.codeChallenge);
+  }
 
   // This version uses chatgpt function to execute the code
   runCode() {
@@ -51,9 +57,22 @@ export class AceEditorComponent implements AfterViewInit {
   }
     compareSolutionToUser() {
     const code = this.editor.getValue();
-    this.aiService.getBinaryAnswerToCode(code, this.codeChallenge, this.codeSolution).subscribe(response => {
-      this.output = response.result;
-    });
+    console.log(this.editor.getValue());
+
+    // starting to improve the api requests, by including some checks
+      if (!code.trim()) { // Check if the code is empty or just whitespace
+        this.output = "Please enter some code before running.";
+        return;
+      }
+
+      this.aiService.getBinaryAnswerToCode(code, this.codeChallenge, this.codeSolution).subscribe(response => {
+        this.output = response.result.toString(); // Convert the boolean to a string
+
+        if (response.result === true) { // Check if the result is true
+          this.codeChallengeSolved.emit();
+        }
+
+      });
   }
 
   getHint() {
@@ -68,5 +87,34 @@ export class AceEditorComponent implements AfterViewInit {
       this.output = response.result;
     });
   }
-}
 
+  replaceSpecialCharsWithASCII(str: string): string {
+    // Specify an array of special characters you wish to replace
+    const specialChars = ['+'];
+
+    return str.split('').map((char) => {
+      if (specialChars.includes(char)) {
+        return char.charCodeAt(0).toString();
+      }
+      return char;
+    }).join('');
+  }
+
+  replacePlusWithPlaceholder(str: string): string {
+    return str.replace(/\+/g, '%2B');
+  }
+
+  replacePlaceholderWithPlus(str: string): string {
+    return str.replace(/__PLUS__/g, '+');
+  }
+
+  // Here with a replacement for all special characters
+  // runCode() {
+  //   let code = this.editor.getValue();
+  //   code = this.replaceSpecialCharsWithASCII(code);
+  //   this.aiService.evaluateCode(code).subscribe(response => {
+  //     this.output = response.result;
+  //   });
+  // }
+
+}

@@ -37,7 +37,6 @@ export class UserService {
   }
 
   // Step 3: Expose userSubject as public observable for other parts to subscribe
-
   get user$(): Observable<User | null> {
     return this.userSubject.asObservable();
   }
@@ -61,11 +60,28 @@ export class UserService {
 
   setScoreForLearnObjekt(score: number, idxLearnObject: number) {
     const requestBody = {
-      username: this.username,
+      username: username,
       id_learnObject: idxLearnObject,
       score: score,
     };
+    console.log(requestBody);
 
-    this.client.post(environment.baseUrl + "/score/"+this.username+"/"+idxLearnObject +"/"+score,requestBody);
+    this.client.post(environment.baseUrl + "/score/"+username+"/"+idxLearnObject +"/"+score,requestBody)
+      .subscribe(response => {
+        console.log('Score set successfully', response);
+      }, error => {
+        console.error('Error setting score:', error);
+      });
   }
+
+  updateUserIdxActualLearnObject(user: User):  Observable<User> {
+    return this.client.put<User>(environment.baseUrl + "/user/updateIdxActualLearnObject", user).pipe(
+      tap(updatedUser => {
+        // Step 2: Emit new user data via the BehaviorSubject
+        this.userSubject.next(updatedUser);
+      })
+    );
+  }
+
 }
+
