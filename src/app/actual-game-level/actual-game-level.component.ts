@@ -96,16 +96,19 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
     alert(text);
     if (this.user && this.user.life) {
       this.user.life -= 1;
-      this.userService.updateUserLife(this.user).subscribe(
-        (response) => {
-          console.log('User life updated:', response);
-          this.router.navigate(['/escape-room']);
-        },
-        (error) => {
-          console.error('Error updating user life:', error);
-          this.router.navigate(['/escape-room']);
-        }
-      );
+      this.zone.run(()=>
+      {
+        this.userService.updateUserLife(this.user).subscribe(
+          (response) => {
+            console.log('User life updated:', response);
+            this.router.navigate(['/escape-room']);
+          },
+          (error) => {
+            console.error('Error updating user life:', error);
+            this.router.navigate(['/escape-room']);
+          }
+        );
+      });
     }
     this.router.navigate(['/escape-room']);
   }
@@ -131,7 +134,7 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
       // Szenario: User hat alle Level gelöst
       if (this.user.idxActualLearnObject > 6) {
         alert("Glückwunsch, du hast alle Level gelöst!");
-        this.router.navigate(['/about']);
+        this.router.navigate(['/high-score']);
         return;
       }
       this.userService.updateUserIdxActualLearnObject(this.user).subscribe(
