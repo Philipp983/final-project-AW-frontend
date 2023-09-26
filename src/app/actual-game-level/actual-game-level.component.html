@@ -18,12 +18,12 @@
 </div>
 
 
-<div class="story" *ngIf="levelData">
-  <app-animation-text
-
-    [text]="levelData.story"
-
-  ></app-animation-text>
+<div  class="story" *ngIf="levelData">
+  {{levelData.story}}
+  <br>
+  <br>
+  <h3 >What you need to know for this Task is:</h3>
+  {{levelData.theory}}
 </div>
 
 <div class="terminal" *ngIf="levelData">
@@ -36,7 +36,6 @@
 
     (codeChallengeSolved)="handleCodeChallengeSuccess()"
   ></app-ace-editor>
-
 
 
 </div>
