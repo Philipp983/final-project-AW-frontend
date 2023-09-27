@@ -33,7 +33,6 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
 
 
-
   ngOnInit() {
     const username = this.authService.getUsername();
     this.userService.getUserByUsername(username).subscribe(
@@ -50,7 +49,6 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
 
     this.audioService.play();
     this.audioService.setVolume(0.3);
-
     for (let i = 1; i <= 6; i++) {
       this.levelService.indexLevel = i.toString();
       this.levelService.getLevel().subscribe(
@@ -65,10 +63,7 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // Pause audio when the component is destroyed
     this.audioService.pause();
-
-    // Unsubscribe from user$ to prevent memory leaks
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
@@ -77,11 +72,9 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   playAudio() {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     if (audio.paused) {
-      // If audio is paused, play it
       audio.play();
       this.buttonText = 'Pause';
     } else if (audio.played) {
-      // If audio is playing, pause it
       audio.pause();
       this.buttonText = 'Intro';
     }
