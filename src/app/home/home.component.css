@@ -49,7 +49,7 @@ body {
   font-size: 40px;
   font-weight: bold;
   margin: 20px;
-  -webkit-text-stroke: 1px white;
+  -webkit-text-stroke: 1px gold;
 }
 .welcome img{
   width: 200px;
@@ -62,13 +62,12 @@ body {
   position: relative;
   background-color: transparent; /* Hintergrundfarbe des Buttons */
   border: none;
-  color: transparent;
+  color: white;
   width: 400px;
   cursor: pointer;
   overflow: hidden;
   padding: 10px;
-  font-size: 36px;
-  font-weight: bold;
+  font-size: 24px;
   margin: 20px;
 }
 
@@ -98,7 +97,7 @@ body {
   }
 }
 .water-button:hover {
-  color: mistyrose;
+  color: white;
 }
 .transTogether{
   color: transparent;
@@ -106,7 +105,10 @@ body {
 .transTogether:hover{
   color: black;
 }
-
+.transparent{
+  place-items: center; /* Zentriert horizontal und vertikal */
+  height: 100vh;
+}
 
 
 
