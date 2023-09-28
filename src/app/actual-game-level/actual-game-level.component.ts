@@ -31,13 +31,14 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     private router: Router,
-    private zone:NgZone
-  ) {}
+    private zone: NgZone
+  ) {
+  }
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
   @ViewChild('audioPlayer2') audioPlayer2!: ElementRef<HTMLAudioElement>;
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
-  buttonText= "Intro";
+  buttonText = "Intro";
 
   ngOnInit(): void {
     const username = this.authService.getUsername();
