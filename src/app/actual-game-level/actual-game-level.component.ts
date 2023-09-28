@@ -29,13 +29,14 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private authService: AuthService,
     private router: Router,
-    private zone:NgZone
-  ) {}
+    private zone: NgZone
+  ) {
+  }
 
   @ViewChild('audioPlayer') audioPlayer!: ElementRef<HTMLAudioElement>;
   @ViewChild('audioPlayer2') audioPlayer2!: ElementRef<HTMLAudioElement>;
   @ViewChild(TimerComponent) timerComponent!: TimerComponent;
-  buttonText= "Intro";
+  buttonText = "Intro";
 
   ngOnInit(): void {
     const username = this.authService.getUsername();
@@ -67,11 +68,10 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
   loadLevelData(levelId: number): void {
     this.levelService.indexLevel = levelId.toString();  // Set the levelId in the service
     this.levelService.getLevel().subscribe(
-      data =>
-      {
-      this.levelData = data;
-      this.imageUrl = environment.baseUrl + this.levelData.image;
-    });
+      data => {
+        this.levelData = data;
+        this.imageUrl = environment.baseUrl + this.levelData.image;
+      });
   }
 
   // Audio part
@@ -98,15 +98,15 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
       this.user.life -= 1;
 
       this.userService.updateUserLife(this.user).subscribe(
-          (response) => {
-            console.log('User life updated:', response);
-            this.router.navigate(['/escape-room']);
-          },
-          (error) => {
-            console.error('Error updating user life:', error);
-            this.router.navigate(['/escape-room']);
-          }
-        );
+        (response) => {
+          console.log('User life updated:', response);
+          this.router.navigate(['/escape-room']);
+        },
+        (error) => {
+          console.error('Error updating user life:', error);
+          this.router.navigate(['/escape-room']);
+        }
+      );
     }
     this.router.navigate(['/escape-room']);
   }
@@ -146,6 +146,7 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
     }
     this.router.navigate(['/escape-room']);
   }
+
   // previous computeScore Method
   // computeScore(timeLimit: number, neededTime: number): number {
   //
@@ -184,7 +185,7 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
   }
 
   addScore(score: number, idxLearnObject: number) {
-    this.userService.setScoreForLearnObjekt(score,idxLearnObject, this.user?.userName);
+    this.userService.setScoreForLearnObjekt(score, idxLearnObject, this.user?.userName);
   }
 
   getLevelScore(): number {
@@ -199,9 +200,6 @@ export class ActualGameLevelComponent implements OnInit, OnDestroy {
     console.log("undefined");
     return 0;
   }
-
-
-
 
 
 }
