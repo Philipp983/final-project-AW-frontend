@@ -37,19 +37,18 @@ body {
 }
 
 .title {
-  color: lightblue;
-  font-size: 50px;
+  color: royalblue;
+  font-size: 6em;
   font-weight: bold;
-  margin: 70px;
+  margin: 50px;
   -webkit-text-stroke: 1px white;
 }
 
 .welcome {
   color: darkblue;
-  font-size: 40px;
-  font-weight: bold;
-  margin: 20px;
-  -webkit-text-stroke: 1px gold;
+  font-size: 4em;
+  margin: 10px;
+  -webkit-text-stroke: 1px black;
 }
 .welcome img{
   width: 200px;
@@ -57,7 +56,9 @@ body {
   border-radius: 50%;
   align-self: center;
   align-content: center;
+  justify-items: center;
 }
+
 .water-button {
   position: relative;
   background-color: transparent; /* Hintergrundfarbe des Buttons */
@@ -80,9 +81,9 @@ body {
   width: 400px;
   height: 80%;
   background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 10%, transparent 70%); /* Radialer Wasser-Effekt */
-  transform: scale(0.8); /* Skalierung des Effekts */
+  transform: scale(0.8);
   opacity: 0;
-  animation: water-ripple 3s linear infinite; /* Animation für den Wasser-Effekt */
+  animation: water-ripple 3s linear infinite;
   animation-direction: alternate;
 }
 
@@ -106,7 +107,7 @@ body {
   color: black;
 }
 .transparent{
-  place-items: center; /* Zentriert horizontal und vertikal */
+  place-items: center;
   height: 100vh;
 }
 
