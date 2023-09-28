@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Greeting} from "../greeting.service";
 import {AuthService} from "../auth.service";
 import {User, UserService} from "../user.service";
