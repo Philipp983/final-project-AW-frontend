@@ -21,8 +21,7 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   showTooltip: boolean = false;
   levels: Level[] = [];
 
-  constructor(private audioService: AudioService,
-              private userService: UserService,
+  constructor(private userService: UserService,
               private authService: AuthService,
               private levelService: LevelService,
               private router: Router) {
@@ -55,8 +54,6 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.audioService.play();
-    this.audioService.setVolume(0.3);
     for (let i = 1; i <= 6; i++) {
       this.levelService.indexLevel = i.toString();
       this.levelService.getLevel().subscribe(
@@ -71,13 +68,12 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.audioService.pause();
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
     }
   }
 
-  playAudio() {
+/*  playAudio() {
     const audio: HTMLAudioElement = this.audioPlayer.nativeElement;
     if (audio.paused) {
       audio.play();
@@ -86,7 +82,7 @@ export class EscapeRoomComponent implements OnInit, OnDestroy {
       audio.pause();
       this.buttonText = 'Intro';
     }
-  }
+  }*/
 
   audioEnded() {
     this.buttonText = 'Intro'
